@@ -163,13 +163,25 @@ public class PdfTemplatRender {
         this.document.close();
     }
 
+    private void checkAndCreatePdfPath(){
+        File pasta = new File("pdfs");
+        if (!pasta.exists()) {
+            if (pasta.mkdirs()) {
+                System.out.println("Pasta criada com sucesso!");
+            } else {
+                System.out.println("Falha ao criar a pasta.");
+            }
+        } else {
+            System.out.println("A pasta já existe.");
+        }
+    }
     PdfTemplatRender(Rectangle pageSize,String outputName) throws DocumentException, FileNotFoundException {
+        this.checkAndCreatePdfPath();
         long timeStamp = System.currentTimeMillis();
-
         this.document = new Document(pageSize);
         // Cria o documento PDF
         // Cria o writer que escreve o conteúdo no arquivo
-        PdfWriter.getInstance(this.document, new FileOutputStream(timeStamp + "_" + outputName));
+        PdfWriter.getInstance(this.document, new FileOutputStream("pdfs"+File.separator+timeStamp + "_" + outputName));
         // Abre o documento para edição
         this.document.open();
     }
