@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.Arrays;
 
 public class PdfTemplatRender {
-    private Document document;
+    private final Document document;
 
     private PdfPTable header = null;
     private PdfPTable tableHeader = null;
@@ -164,8 +164,6 @@ public class PdfTemplatRender {
     }
 
     PdfTemplatRender(Rectangle pageSize,String outputName) throws DocumentException, FileNotFoundException {
-
-        File filePath= new File(outputName);
         long timeStamp = System.currentTimeMillis();
 
         this.document = new Document(pageSize);
